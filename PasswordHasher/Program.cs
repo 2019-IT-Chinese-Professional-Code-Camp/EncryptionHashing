@@ -22,7 +22,8 @@ namespace PasswordHasher
                 Console.WriteLine("password is good");
             else
                 Console.WriteLine("bad password");
-            CustomPassword.CheckPassword("jun.wang@cvshealth.com", "Pwd@1234");
+            
+            CustomPassword.CheckPassword("Pwd@1234");
 
             string userName = "yourname";
             string password = "Test#1234";
@@ -143,7 +144,7 @@ namespace PasswordHasher
             return retVal;
         }
 
-        public static bool CheckPassword(string accountName, string password)
+        public static bool CheckPassword(string password)
         {
             HashAlgorithm hash = HashAlgorithm.Create("SHA1");
             bool matchFound = false;
