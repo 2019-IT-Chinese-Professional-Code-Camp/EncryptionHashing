@@ -13,12 +13,12 @@ namespace PasswordHasher
             //string beforehashPw = "wP]cU,?iJ)TpH3j#5C@P,5GZf?33f}";
 
 
-            string hassedPw = "ALjDQR0qXr1F8Xp3hcSnGjYzXiA0tmwDNpq+oKU0fVYlAzHy7JL6+VkdHn1Rp+O2TA==";
+            //string hassedPw = "ALjDQR0qXr1F8Xp3hcSnGjYzXiA0tmwDNpq+oKU0fVYlAzHy7JL6+VkdHn1Rp+O2TA==";
             string beforehashPw = "Passw0rd#01";
             string password2bhashed = "Passw0rd#01";
             string hashedPassword = HashPassword(password2bhashed);
 
-            if (VerifyHashedPassword(hassedPw, beforehashPw))
+            if (VerifyHashedPassword(hashedPassword, beforehashPw))
                 Console.WriteLine("password is good");
             else
                 Console.WriteLine("bad password");
