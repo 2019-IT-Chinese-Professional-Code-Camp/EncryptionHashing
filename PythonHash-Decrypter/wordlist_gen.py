@@ -47,3 +47,7 @@ def main():
         os.system("python wordlist_gen.py -h")
     else:
         wordlists(args.chars, args.min_lengthe, args.max_length, args.output)
+
+
+if __name__ == '__main__':
+    main()
