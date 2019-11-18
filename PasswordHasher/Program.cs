@@ -25,29 +25,29 @@ namespace PasswordHasher
             
             CustomPassword.CheckPassword("Pwd@1234");
 
-            string userName = "yourname";
             string password = "Test#1234";
-            CustomPassword.hashPassword(password); 
-            testHash(userName, password);
+            string myhashedpassword = HashPassword(password);
+            
+            //CustomPassword.hashPassword(password); 
+            bool matched = testHash(myhashedpassword, password);
         }
 
-        private static void testHash(string userName, string password)
+        private static bool testHash(string hasedString, string password)
         {
+            bool matched = false; 
             try
             {
-                var myPassword = HashPassword(password);
-                if (VerifyHashedPassword(myPassword, password))
-                    Console.WriteLine("you are good guy");
-                else
-                    Console.WriteLine("not so good");
-
+                 if (VerifyHashedPassword(hasedString, password))
+                {
+                    matched = true; 
+                }
             }
             catch (Exception)
             {
 
                 throw new NotImplementedException();
             }
-            
+            return matched; 
             
         }
         public static string HashPassword(string password)
