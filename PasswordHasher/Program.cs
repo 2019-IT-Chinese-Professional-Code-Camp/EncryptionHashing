@@ -16,6 +16,8 @@ namespace PasswordHasher
             //string hassedPw = "ALjDQR0qXr1F8Xp3hcSnGjYzXiA0tmwDNpq+oKU0fVYlAzHy7JL6+VkdHn1Rp+O2TA==";
             string beforehashPw = "Passw0rd#01";
             string password2bhashed = "Passw0rd#01";
+
+			// hash password
             string hashedPassword = HashPassword(password2bhashed);
 
             if (VerifyHashedPassword(hashedPassword, beforehashPw))
@@ -30,6 +32,8 @@ namespace PasswordHasher
             
             //CustomPassword.hashPassword(password); 
             bool matched = testHash(myhashedpassword, password);
+
+			Console.ReadKey();
         }
 
         private static bool testHash(string hasedString, string password)
@@ -58,14 +62,27 @@ namespace PasswordHasher
             {
                 throw new ArgumentNullException("password");
             }
-            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
+
+			// Rfc2898DeriveBytes takes a password, a salt, and an iteration count, and then
+			// genrates keys through calls to the GetBytes method
+			// 0x10 = 16, 0x3e8 = 1000, 0x20 = 32 
+			using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
             {
                 salt = bytes.Salt;
                 buffer2 = bytes.GetBytes(0x20);
             }
             byte[] dst = new byte[0x31];
-            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+
+			// Buffer.BlockCopy(Array src, int srcOffset, Array dst, int dstOffset, int count): 
+			// Copies a specified number of bytes from a source array starting at a particular offset to a destination array starting at a particular offset.
+
+			// copy 16 digits salt to dst, leave the first digit as 0
+			Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+
+			// copy 32 digits buffer2 to dst after salt
             Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+
+			// now dst = 0 + salt (16 digits) + buffer2 (32 digits)
             return Convert.ToBase64String(dst);
         }
         public static bool VerifyHashedPassword(string hashedPassword, string password)
@@ -79,15 +96,24 @@ namespace PasswordHasher
             {
                 throw new ArgumentNullException("password");
             }
+
             byte[] src = Convert.FromBase64String(hashedPassword);
-            if ((src.Length != 0x31) || (src[0] != 0))
+
+			// if the length of src is not 49, or the first is not zero, then false
+			if ((src.Length != 0x31) || (src[0] != 0))
             {
                 return false;
             }
+
+			// dst = salt
             byte[] dst = new byte[0x10];
             Buffer.BlockCopy(src, 1, dst, 0, 0x10);
+
+			// buffer3 = buffer2 in the original bytes
             byte[] buffer3 = new byte[0x20];
             Buffer.BlockCopy(src, 0x11, buffer3, 0, 0x20);
+
+			// check if two bytes are equal
             using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, dst, 0x3e8))
             {
                 buffer4 = bytes.GetBytes(0x20);
