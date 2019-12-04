@@ -138,7 +138,11 @@ namespace PasswordHasher
         public static string hashPassword(string password)
         {
             // Encode password & generate password salt
+
+            // encoding a set of characters into a sequence of bytes
             byte[] passwordData = Encoding.Unicode.GetBytes(password);
+
+            // using a array with 16 random bytes as salt
             byte[] passwordSaltData = _PasswordSaltGenerate();
 
             byte[] passwordDataSalted = new byte[passwordData.Length + passwordSaltData.Length];
@@ -159,12 +163,15 @@ namespace PasswordHasher
             return passwordFinal; 
 
         }
+
+        // generate sale with random values
         private static byte[] _PasswordSaltGenerate()
         {
             RNGCryptoServiceProvider rnd = new RNGCryptoServiceProvider();
             byte[] retVal = new byte[16];
 
             // Generate salt
+            // fill the array with a random value
             rnd.GetBytes(retVal);
 
             return retVal;
