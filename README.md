@@ -3,12 +3,12 @@
 # Jun - Hash password, encyrption, password attack
 
 ## Hashing & Hash Functions
-1. Hashing is an important tool which is designed to use a special function called the hash function to map a given value with a particular key. Hashing plays a very important role in Data Structures for accessing data efficiently and in security system.
-2. A Hash function is a function which when given a key, it will generate an address in the table based on specific mathematical formula. Hash function has following properties:
-  1. it always returns a number for an object.
-  2. Two equal objects will always have the same number
-  3. two unequal objects not always have different numbers (Collisions)
-  4. It acts as a **one-way function**: a mathematical operation that's easy to perform, but very difficult to reverse.
+1. Hashing is an important tool which is designed to use a special function called the hash function to map a key to an index.
+2. A Hash function is a function which when given a key, it will generate an address or index in the table based on specific mathematical formula. Hash function has following properties:
+    1. it always returns a number for an object.
+    2. Two equal objects will always have the same number
+    3. two unequal objects not always have different numbers (Collisions)
+    4. It acts as an **one-way function**: a mathematical operation that's easy to perform, but very difficult to reverse.
 
 ![Hashing](./PasswordHasher/images/hashing.PNG)
 
@@ -18,42 +18,42 @@
 
 ### Password Hashing
 1. Password Hashing is the act of converting passwords into unreadable strings of characters that are designed to be impossible to convert back.
-  1. It turns readable data into a scrambled cipher to prevent passowrds from being misused.
-  2. To verify a password, the application simply performs the same hash again and checks the result against the hash it created for your real password.
+    1. It turns readable data into a scrambled cipher to prevent passowrds from being misused.
+    2. To verify a password, the application simply performs the same hash again and checks the result against the hash it created for your real password.
 
 ### Strong Hash VS Weak Hash
 1. In theory, no one should be able to take the hashes and convert them back into passwords.
 2. In practice, some hashing schemes are significantly harder to reverse than others (i.e: MD-5, SHA-1, etc.).
 
-### Password Attack 
+### Password Attack
 1. Password attacking is not black magic, it's simply about guessing passwords and running them through the same hash function to find a match. 
 2. Password attacking can be done via **rainbow tables**, which contains immense lists of pre-computed hashes for every possible password.
 3. Password attacking can be done via **dictionary attacks**, which contains real words, collections of known common passwords from past breaches, with statistical analyses of these passwords to find patterns to facilitate password guessing.
 
-### Spice Up Password Hashes with Salt & Pepper
-1. Salting: adding random data to a password before hashing it and then storing the salt value along with the hash,
-  1. Salt is not secret and can be stored alongside the hashed output
-  2. The salt and hash are usually stored in a database
-  3. Salt needs to be long enough to be unique
+### Spice Up Password Hashing with Salt & Pepper
+1. Salting: adding random data to a password before hashing it and then storing the salt value along with the hash.
+    1. Salt is not secret and can be stored alongside the hashed output
+    2. The salt and hash are usually stored in a database
+    3. Salt needs to be long enough to be unique
 
-2. Pepper: similarly, pepper is a secret added to password prior to being hashed.
-  1. Pepper is secret and must not be stored with the hashed output
-  2. Pepper must be stored separately to prevent it from being obtained by the attacker in case of a database breach
-  3. Pepper has to be secure to remain secret with at lease 112 bits (recommended by NIST)
-  4. Pepper must be generated anew for every application, otherwise a breach of one application would result in lowered security of another application
-  5. Pepper helps to protect against both **dictionary attacks** and **brute-force attacks** as long as the attacker does not have the pepper value
+2. Pepper: similar with Salting, pepper is a secret added to password prior to being hashed.
+    1. Pepper is secret and must not be stored with the hashed output
+    2. Pepper must be stored separately to prevent it from being obtained by the attacker in case of a database breach
+    3. Pepper has to be secure to remain secret with at lease 112 bits (recommended by NIST)
+    4. Pepper must be generated anew for every application, otherwise a breach of one application would result in lowered security of another application
+    5. Pepper helps to protect against both **dictionary attacks** and **brute-force attacks** as long as the attacker does not have the pepper value
 
 3. Problems with Peppers:
-  1. It's not maintainable: since the pepper is used at the input to the one-way function (Hashing), you can never change the pepper for the lifetime of the value
+    1. It's not maintainable: since the pepper is used at the input to the one-way function (Hashing), you can never change the pepper for the lifetime of the value
   
-## Encription & Decription
+## Encryption & Decryption
 1. Encryption: encode and disguise the message's content, which is performed by the message sender
 2. Decryption: the process of encoding an obscured message, which is carried out by the message receiver
 3. Encryption is an effective way to secure data, however, its security is directly tied to encryption key.
 
 ## Hashing VS Encription
 1. Encryption is a two-way function: what is encrypted can be decrypted with the proper key. Hashing is a one-way function: in theory, with a proper designed algorithm, there is no way to reverse the hashing process to reveal the original password.
-2. Hashing + Salt would be a preferred way to protect password
+2. **Hashing + Salt** would be a preferred way to protect password
 
 ## tools:   
 https://www.cleancss.com/
