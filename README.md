@@ -66,6 +66,10 @@ https://www.cleancss.com/
     https://github.com/NVIDIA/tacotron2
     https://github.com/Rayhane-mamah/Tacotron-2
 
+# Some AI/ML/NLP service and library
+    https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/2afb498089f74080d7ef85eb
+    https://cloud.google.com/vision/
+    https://github.com/tesseract-ocr/tesseract
 
 # Charles (Chunren)  Lai-  front end Angular app using JWT token. 
 
